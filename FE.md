@@ -166,3 +166,33 @@ https://juejin.cn/post/6844903696111763470
 https://127.0.0.1:5502/fe-interview/docs/excellent.html#_10-%E6%A8%A1%E5%9D%97%E5%8C%96
 
 ```
+
+### 事件机制
+
+```
+https://127.0.0.1:5501/fe-interview/docs/excellent.html#_17-%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6
+https://www.quirksmode.org/js/events_order.html#link4
+.
+0
+```
+
+### 箭头函数
+
+```
+https://www.cnblogs.com/sparkler/p/13683951.html
+
+```
+
+### JS 内存泄露如何检测？场景有哪些？
+
+```
+https://juejin.cn/post/6844904048961781774#heading-6
+
+```
+
+### async/await 异步总结
+
+```
+https://blog.csdn.net/Anwel/article/details/92845435
+
+```
