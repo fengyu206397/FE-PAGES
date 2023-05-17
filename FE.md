@@ -198,3 +198,25 @@ https://juejin.cn/post/6844904048961781774#heading-6
 https://blog.csdn.net/Anwel/article/details/92845435
 
 ```
+
+### promise 异步总结
+
+```
+https://juejin.cn/post/6844903539605504008
+
+```
+
+### Event Loop 执行机制过程
+
+```
+https://zhuanlan.zhihu.com/p/55511602
+https://127.0.0.1:5501/fe-interview/docs/excellent.html#_12-3-%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84-event-loop
+
+```
+
+### 存储
+
+```
+https://127.0.0.1:5501/fe-interview/docs/excellent.html#_18-4-postmessage
+
+```
