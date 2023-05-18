@@ -220,3 +220,34 @@ https://127.0.0.1:5501/fe-interview/docs/excellent.html#_12-3-%E6%B5%8F%E8%A7%88
 https://127.0.0.1:5501/fe-interview/docs/excellent.html#_18-4-postmessage
 
 ```
+
+### serviceWorker
+
+```
+https://juejin.cn/post/7130833826783166471
+
+```
+
+### webworker
+
+```
+https://juejin.cn/post/7139718200177983524
+
+```
+
+### 浏览器缓存机制
+
+```
+https://127.0.0.1:5501/fe-interview/docs/excellent.html#_20-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6
+
+```
+
+### 从输入 URL 到网页显示的完整过程
+
+```
+浏览器缓存： chrome://net-internals
+浏览器dns缓存： ipconfig /displaydns
+https://blog.csdn.net/m0_48465196/article/details/128225441
+https://juejin.cn/post/6905931622374342670
+
+```
