@@ -250,4 +250,12 @@ https://127.0.0.1:5501/fe-interview/docs/excellent.html#_20-%E6%B5%8F%E8%A7%88%E
 https://blog.csdn.net/m0_48465196/article/details/128225441
 https://juejin.cn/post/6905931622374342670
 
+https讲解
+https://zhuanlan.zhihu.com/p/43789231
+https://juejin.cn/post/7036551179517558791
+https://www.bilibili.com/video/BV1Sg411A79a?p=4&vd_source=253894f5e6055e4ae8a6c7fdc6cdac48
+
+tcp ip
+https://blog.csdn.net/zzzlueng/article/details/121274387
+
 ```
