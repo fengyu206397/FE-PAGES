@@ -254,8 +254,55 @@ https讲解
 https://zhuanlan.zhihu.com/p/43789231
 https://juejin.cn/post/7036551179517558791
 https://www.bilibili.com/video/BV1Sg411A79a?p=4&vd_source=253894f5e6055e4ae8a6c7fdc6cdac48
+https://www.runoob.com/http/http2-tutorial.html
 
 tcp ip
 https://blog.csdn.net/zzzlueng/article/details/121274387
+https://juejin.cn/post/6844903685563105293
+
+```
+
+### 常见的 web 前端攻击方式有哪些
+
+```
+https://juejin.cn/post/7201391887147401273#heading-5
+
+```
+
+### 常见的 web 前端攻击方式有哪些
+
+```
+https://juejin.cn/post/7201391887147401273#heading-5
+
+```
+
+### 跨域
+
+```
+https://127.0.0.1:5501/fe-interview/docs/excellent.html#_18-2-cors
+https://blog.csdn.net/Crazykun/article/details/118365808
+
+```
+
+### 移动端 H5 点击有 300ms 延迟，该如何解决
+
+```
+https://juejin.cn/post/6844903633528553485
+
+```
+
+### 如何实现网页多标签 tab 通讯
+
+```
+https://juejin.cn/post/7112302144442613773
+https://blog.csdn.net/qq_53931766/article/details/129079752?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-3-129079752-blog-123701860.235%5Ev36%5Epc_relevant_default_base3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-3-129079752-blog-123701860.235%5Ev36%5Epc_relevant_default_base3&utm_relevant_index=4
+
+```
+
+### requestIdleCallback 和 requestAnimationFrame 有什么区别
+
+```
+https://juejin.cn/post/6844904056457003015
+https://juejin.cn/post/6844903592831238157
 
 ```
