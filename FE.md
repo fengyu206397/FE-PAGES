@@ -308,3 +308,125 @@ https://mp.weixin.qq.com/s/Bh-nveCyLqkEDGQXri-8fg
 https://cloud.tencent.com/developer/article/2081704
 
 ```
+
+### 排序
+
+#### bubble
+
+```
+    function bubble(arr) {
+      for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = 0; j < arr.length - 1 - i; j++) {
+          if (arr[j] > arr[j + 1]) {
+            let temp = arr[j + 1]
+            arr[j + 1] = arr[j]
+            arr[j] = temp
+          }
+        }
+      }
+    }
+```
+
+#### selection
+
+```
+    function selectionSort2(arr) {
+      let min
+      for (let i = 0; i < arr.length; i++) {
+        min = i;
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr[min] > arr[j]) {
+            min = j
+          }
+        }
+        arr[i] = arr[min]
+      }
+    }
+
+```
+
+#### insert
+
+```
+    function insertSort2(arr) {
+      for (let i = 1; i < arr.length; i++) {
+        let j = i - 1
+        let temp = arr[i]
+        while (j && arr[j] > arr[i]) {
+          arr[j + 1] = arr[j]
+          j--
+        }
+        arr[j + 1] = temp
+      }
+    }
+
+```
+
+#### merge
+
+```
+    function mergeSort2(arr) {
+      if (arr.length < 2) {
+        return arr
+      }
+      let middle = Math.floor(arr.length / 2)
+      let left = arr.slice(0, middle)
+      let right = arr.slice(middle)
+      return merge2(mergeSort2(left), mergeSort2(right))
+    }
+
+    function merge2(left, right) {
+      let result = []
+      while (left.length && right.length) {
+        if (left[0] < right[0]) {
+          result.push(left.shift())
+        } else {
+          result.push(right.shift())
+        }
+      }
+
+      while (left.length) {
+        result.push(left.shift())
+      }
+      while (right.length) {
+        result.push(right.shift())
+      }
+
+      return result
+    }
+
+```
+
+#### qucik
+
+```
+      function quickSort(arr, left, right) {
+      left = typeof left == 'number' ? left : 0
+      right = typeof right == 'number' ? right : arr.length - 1
+      if (left < right) {
+        let pivot = quick(arr, left, right)
+        quickSort(arr, left - 1, pivot)
+        quickSort(arr, pivot + 1, right)
+      }
+    }
+
+    function quick(arr, left, right) {
+      let pivot = arr[left]
+      while (left < right) {
+        while (left < right && arr[right] > pivot) {
+          right--
+        }
+        arr[left] = arr[right]
+        left++
+        while (left < right && arr[left] < pivot) {
+          left++
+        }
+        arr[right] = arr[left]
+        right--
+      }
+      arr[left] = pivot
+      return left
+    }
+
+
+```
