@@ -587,3 +587,86 @@ Function.prototype.bind = function(context = window) {
     
   }
 }
+
+#### promise
+
+class mPromise {
+  static pending = 'pending'
+  static fulfilled = 'fulfilled'
+  static rejected = 'rejected'
+
+  constructor(excutor) {
+    this.promiseState = mPromise.pending
+    this.promiseResult = null
+    this.fulfiledCallbacks = []
+    this.rejectedCallbacks = []
+    try{
+      excutor(this.resolve.bind(this), this.reject.bind(this))
+    }catch(error) {
+      this.reject(error)
+    }
+  }
+
+  resolve(val) {
+    if(this.promiseState === mPromise.pending) {
+      this.promiseState = mPromise.fulfilled
+      this.promiseResult = val
+      this.fulfiledCallbacks.forEach(fn => {
+        fn(val)
+      })
+    }
+  }
+
+  reject(val) {
+    if(this.promiseState === mPromise.pending) {
+      this.promiseState = mPromise.rejected
+      this.promiseResult = val
+      this.rejectedCallbacks.forEach(fn => {
+        fn(val)
+      })
+    }
+  }
+
+  then(onFulFilled, onRejected) {
+    const promise2 =  new mPromise((resolve, reject) => {
+      if(this.promiseState === mPromise.fulfilled) {
+        setTimeout(() => {
+          try {
+            if(typeof onFulFilled == 'function') {
+              let x = onFulFilled(this.promiseResult)
+            } else {
+              resolve(this.promiseResult)
+            }
+          } catch(error) {
+            reject(error)
+          }
+          
+        })
+      }
+
+      if(this.promiseState === mPromise.rejected) {
+        setTimeout(() => {
+          try {
+            let x = onRejected(this.promiseResult)
+          } catch(error) {
+            reject(error)
+          }
+        })
+      }
+
+      if(this.promiseState === "pending") {
+        this.fulfiledCallbacks.push((val) => {
+          setTimeout(onFulFilled(val))
+        })
+        this.rejectedCallbacks.push((val) => {
+          setTimeout(onRejected(val))
+        })
+      }
+    })
+    return promise2
+  }
+
+  resolvePromise(promise2, x, reject, resolve) {
+
+  }
+}
