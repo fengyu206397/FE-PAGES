@@ -510,6 +510,10 @@ chrome spdyZ增强http协议
 3.0 改用udp协议，解决tcp丢包或网络断开导致的数据阻塞问题
 
 #### 手写
+```
+https://juejin.cn/post/6946136940164939813#heading-11
+https://github.com/fengyu206397/fe-handwriting
+```
 #### new
 
 function New(fn) {
@@ -590,83 +594,155 @@ Function.prototype.bind = function(context = window) {
 
 #### promise
 
-class mPromise {
-  static pending = 'pending'
-  static fulfilled = 'fulfilled'
-  static rejected = 'rejected'
+https://juejin.cn/post/7043758954496655397
 
+```
+class myPromise {
+  static PENDING = "pending"
+  static FULFILLED = 'fulfilled'
+  static REJECTED = 'rejected'
   constructor(excutor) {
-    this.promiseState = mPromise.pending
-    this.promiseResult = null
-    this.fulfiledCallbacks = []
-    this.rejectedCallbacks = []
-    try{
+    this.PromiseState = myPromise.PENDING
+    this.PromiseResult = null
+    this.onFulfilledCallbacks = []
+    this.onRejectedCallbacks = []
+
+    try {
       excutor(this.resolve.bind(this), this.reject.bind(this))
-    }catch(error) {
+    } catch (error) {
       this.reject(error)
     }
   }
 
-  resolve(val) {
-    if(this.promiseState === mPromise.pending) {
-      this.promiseState = mPromise.fulfilled
-      this.promiseResult = val
-      this.fulfiledCallbacks.forEach(fn => {
-        fn(val)
+  resolve(value) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED
+      this.PromiseResult = value
+
+      this.onFulfilledCallbacks.forEach(fn => {
+        fn(value)
       })
     }
+
   }
 
-  reject(val) {
-    if(this.promiseState === mPromise.pending) {
-      this.promiseState = mPromise.rejected
-      this.promiseResult = val
-      this.rejectedCallbacks.forEach(fn => {
-        fn(val)
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseResult = reason
+      this.PromiseState = myPromise.REJECTED
+
+      this.onRejectedCallbacks.forEach(fn => {
+        fn(reason)
+
       })
     }
   }
 
   then(onFulFilled, onRejected) {
-    const promise2 =  new mPromise((resolve, reject) => {
-      if(this.promiseState === mPromise.fulfilled) {
+    let promise2 = new myPromise((resolve, reject) => {
+      if (this.PromiseState === myPromise.FULFILLED) {
         setTimeout(() => {
           try {
-            if(typeof onFulFilled == 'function') {
-              let x = onFulFilled(this.promiseResult)
+            if (typeof onFulFilled === 'function') {
+              let x = onFulFilled(this.PromiseResult)
+              resolvePromise(promise2, x, resolve, reject)
             } else {
-              resolve(this.promiseResult)
+              resolve(this.PromiseResult)
             }
-          } catch(error) {
+          } catch (error) {
             reject(error)
           }
-          
         })
-      }
-
-      if(this.promiseState === mPromise.rejected) {
+      } else if (this.PromiseState === myPromise.REJECTED) {
         setTimeout(() => {
           try {
-            let x = onRejected(this.promiseResult)
-          } catch(error) {
+            if (typeof onRejected === 'function') {
+              let x = onRejected(this.PromiseResult)
+              resolvePromise(promise2, x, resolve, reject)
+            } else {
+              reject(this.PromiseResult)
+            }
+          } catch (error) {
             reject(error)
           }
         })
-      }
-
-      if(this.promiseState === "pending") {
-        this.fulfiledCallbacks.push((val) => {
-          setTimeout(onFulFilled(val))
+      } else {
+        this.onFulfilledCallbacks.push((y) => {
+          setTimeout(() => {
+            try {
+              if (typeof onFulFilled === 'function') {
+                let x = onFulFilled(y)
+                resolvePromise(promise2, x, resolve, reject)
+              } else {
+                resolve(y)
+              }
+            } catch (error) {
+              reject(error)
+            }
+          })
         })
-        this.rejectedCallbacks.push((val) => {
-          setTimeout(onRejected(val))
+
+        this.onRejectedCallbacks.push(y => {
+          setTimeout(() => {
+            try {
+              if (typeof onRejected === 'function') {
+                let x = onRejected(y)
+                resolvePromise(promise2, x, resolve, reject)
+              } else {
+                reject(y)
+              }
+            } catch (error) {
+              reject(error)
+            }
+          })
         })
       }
     })
     return promise2
   }
+}
 
-  resolvePromise(promise2, x, reject, resolve) {
 
+function resolvePromise(promise2, x, resolve, reject) {
+  if(promise2 === x) {
+    throw TypeError('cycle detected ');
+  } else if(x instanceof myPromise){
+    try {
+      x.then((y) => {
+        resolvePromise(promise2, y, resolve, reject)
+      },reject)
+    } catch(error) {
+      reject(error)
+    }
+  } else if(x !== null && ((typeof x === 'object') || (typeof x === 'function'))) {
+    try {
+      var then = x.then
+    } catch(error) {
+      return reject(error)
+    }
+    let called = false
+    if(typeof then === 'function') {
+      try {
+        then.call(x, y => {
+          resolvePromise(promise2, y, resolve, reject)
+        }, r => {
+          reject(r)
+        })
+      }catch(error) {
+        reject(error)
+      }
+    } else {
+      resolve(x)
+    }
+  } else {
+    resolve(x)
   }
 }
+```
+#### 柯里化
+```
+只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数,作用：参数复用，延迟执行，减少了代码冗余，增加了代码可读性
+```
+
+
+https://juejin.cn/post/6844903834456686605?searchId=2023101610005350A2514A26C0D2F437A4
