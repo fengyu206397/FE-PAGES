@@ -436,37 +436,39 @@ https://juejin.cn/post/6844903582328717325#heading-35
 
 ```
 
-### 手写debounce和throttle
+### 手写 debounce 和 throttle
 
 function debounce(fn, delay, im) {
-  let timeId
-  return function() {
-    if(im && !timeId) fn.apply(this, argments)
-    if(timeId) clearTimeOut(timeId)
-    timeId = setTimeOut(() => {
-      fn.apply(this, argments)
-    },delay)
-  }
+let timeId
+return function() {
+if(im && !timeId) fn.apply(this, argments)
+if(timeId) clearTimeOut(timeId)
+timeId = setTimeOut(() => {
+fn.apply(this, argments)
+},delay)
+}
 }
 
-
 function throttle(fn, interval) {
-  let lastTime = 0
-  return function() {
-    let now = new Date.getIime()
-    let residualTime = now - lastTime - interval
+let lastTime = 0
+return function() {
+let now = new Date.getIime()
+let residualTime = now - lastTime - interval
 
     if(residualTime > 0) {
       lastTime = now
       fn.apply(this, argments)
     }
-  }
+
+}
 }
 
-### vue性能优化
+### vue 性能优化
+
 #### 编码
-data中尽量放必要的数据
-v-for key值唯一
+
+data 中尽量放必要的数据
+v-for key 值唯一
 路由懒加载
 防抖节流
 按需加载
@@ -474,21 +476,25 @@ v-for key值唯一
 图片懒加载
 
 #### 渲染
+
 预渲染
 ssr
 
 #### 打包
+
 分析打包体积，去除相同依赖
-gzib压缩
+gzib 压缩
 treeshaking
 cdn
 缓存策略
 
 #### 体验
+
 骨架片
 pwa
 
 ### 首屏优化
+
 cdn
 缓存
 gzip
@@ -500,45 +506,48 @@ HTTP2
 ```
   https://juejin.cn/post/7079936383925616653?searchId=202310091057597782F3FD0BA429AAAF59
 ```
-0.9  使用get请求传输html文本内容，验证web服务可行性
-1.0  可以传输其他类型的内容，增加了状态码和http header，协议版本号，增加了head和post请求
-1.1 默认tcp为长链接，增加了put、delete、patch方法，增加了range头支持了断点续传，响应数据支持了分块，利于大文件传输。服务器为统一
-域名能分配多个tcp连接，一个tcp中有多个http请求，但是服务器响应跟请求的顺序有关。
-chrome spdyZ增强http协议
-2.0 解决1.1并发问题，使用二进制传输数据，使用多路复用机制，基本上只用一个tcp进行连接，请求数据和响应数据都有唯一编号，解决了并发问题。除此之外，http头部压缩、数据请求优先级、服务端推送功能
 
-3.0 改用udp协议，解决tcp丢包或网络断开导致的数据阻塞问题
+0.9 使用 get 请求传输 html 文本内容，验证 web 服务可行性
+1.0 可以传输其他类型的内容，增加了状态码和 http header，协议版本号，增加了 head 和 post 请求
+1.1 默认 tcp 为长链接，增加了 put、delete、patch 方法，增加了 range 头支持了断点续传，响应数据支持了分块，利于大文件传输。服务器为统一
+域名能分配多个 tcp 连接，一个 tcp 中有多个 http 请求，但是服务器响应跟请求的顺序有关。
+chrome spdyZ 增强 http 协议
+2.0 解决 1.1 并发问题，使用二进制传输数据，使用多路复用机制，基本上只用一个 tcp 进行连接，请求数据和响应数据都有唯一编号，解决了并发问题。除此之外，http 头部压缩、数据请求优先级、服务端推送功能
+
+3.0 改用 udp 协议，解决 tcp 丢包或网络断开导致的数据阻塞问题
 
 #### 手写
+
 ```
 https://juejin.cn/post/6946136940164939813#heading-11
 https://github.com/fengyu206397/fe-handwriting
 ```
+
 #### new
 
 function New(fn) {
-  let a = {}
-  if(fn.prototype != null) {
-    a.__proto__ = fn.prototype
-  }
-  let res = fn.apply(a, Array.prototype.slice.call(argments, 1))
-  if(res) {
-    return res
-  } else {
-    return a
-  }
+let a = {}
+if(fn.prototype != null) {
+a.**proto** = fn.prototype
+}
+let res = fn.apply(a, Array.prototype.slice.call(argments, 1))
+if(res) {
+return res
+} else {
+return a
+}
 }
 
 #### json.stringfy
 
 function josnStringify(obj) {
 
-  let type = typeof obj
-  if(/string|number|boolean/.test(obj) || obj === null) {
-    return '"' + obj + '"'
-  } else if(type == 'object'){
-    let arr = Array.isArray(obj)
-    let json = []
+let type = typeof obj
+if(/string|number|boolean/.test(obj) || obj === null) {
+return '"' + obj + '"'
+} else if(type == 'object'){
+let arr = Array.isArray(obj)
+let json = []
 
     for(let key in obj){
       let val = obj[key]
@@ -557,39 +566,42 @@ function josnStringify(obj) {
     } else {
       return '{' + String(json) + '}'
     }
-  }
+
+}
 }
 
 #### JSON.parse
-1. eval('(' + str  + ')')
+
+1. eval('(' + str + ')')
 2. new Function('return ' + str)
 
 #### call allpy bind
+
 Function.prototype.call2 = fucntion(context = window) {
-  context.fn = this
-  let args = Array.prototype.slice.call(1)
-  let result = context.fn(args)
-  delete context.fn
-  return result
+context.fn = this
+let args = Array.prototype.slice.call(1)
+let result = context.fn(args)
+delete context.fn
+return result
 }
 
 Function.prototype.apply2 = function(context = window) {
-  context.fn = this
-  let arg = arguments[1]
-  let result 
-  if(arg) {
-    result = context.fn(...arg)
-  } else {
-    result = context.fn()
-  }
-  delete context.fn
-  return result
+context.fn = this
+let arg = arguments[1]
+let result
+if(arg) {
+result = context.fn(...arg)
+} else {
+result = context.fn()
+}
+delete context.fn
+return result
 }
 
 Function.prototype.bind = function(context = window) {
-  return function() {
-    
-  }
+return function() {
+
+}
 }
 
 #### promise
@@ -739,10 +751,13 @@ function resolvePromise(promise2, x, resolve, reject) {
   }
 }
 ```
+
 #### 柯里化
+
 ```
 只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数,作用：参数复用，延迟执行，减少了代码冗余，增加了代码可读性
 ```
 
-
 https://juejin.cn/post/6844903834456686605?searchId=2023101610005350A2514A26C0D2F437A4
+
+####
